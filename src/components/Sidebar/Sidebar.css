@@ -1,0 +1,21 @@
+.custom-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: #134d80 transparent;
+}
+
+.custom-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-sidebar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.custom-sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    background-color: #1E3A8A;
+}
