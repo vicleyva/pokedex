@@ -62,11 +62,6 @@ export default function PokemonDetails({ pokedex, pokemonData }) {
         return orderedSprites.filter(x => !!x);
     }, [orderedSprites]);
 
-    // useEffect(() => {
-
-    // }, [input]);
-
-
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentSpriteIndex((prevIndex) => (prevIndex + 1) % avaiableSprites.length);
@@ -91,13 +86,13 @@ export default function PokemonDetails({ pokedex, pokemonData }) {
 
     return (
         <div className="w-full p-3 space-y-3 overflow-y-auto">
-            <div className="container space-y-3">
+            <div className="container space-y-2">
                 <div className='grid gap-2 grid-cols-2 mt-0'>
                     <div className='flex justify-end items-center'>
                         {!!prev && (
                             <NavLink
                                 to={prev.target}
-                                className='nav-button bg-blue-600 text-white px-1 py-1 rounded-md flex items-center'
+                                className='nav-button bg-blue-700 text-white px-1 py-1 rounded-md flex items-center'
                             >
                                 <FaChevronLeft className="mr-2" />
                                 <span>{prev.name}</span>
@@ -108,7 +103,7 @@ export default function PokemonDetails({ pokedex, pokemonData }) {
                         {!!next && (
                             <NavLink
                                 to={next.target}
-                                className='nav-button bg-blue-600 text-white px-1 py-1 rounded-md flex items-center'
+                                className='nav-button bg-blue-700 text-white px-1 py-1 rounded-md flex items-center'
                             >
                                 <span className='mr-1'>{next.name}</span>
                                 <FaChevronRight className="ml-1" />
@@ -116,10 +111,20 @@ export default function PokemonDetails({ pokedex, pokemonData }) {
                         )}
                     </div>
                 </div>
-                <div className="flex flex-row">
+                <div className="flex flex-row justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold tracking-tighter">{capitalizeFirstLetter(pokemonSpecie.name)}</h1>
-                        <p className="text-gray-500 ">{pokemonGenera?.genus || 'No data'}</p>
+                        <h1 className="text-5xl font-bold tracking-tighter">{capitalizeFirstLetter(pokemonSpecie.name)}</h1>
+                        <p className="text-gray-500 text-2xl">{pokemonGenera?.genus || 'No data'}</p>
+                    </div>
+                    <div className="mt-2">
+                        <button
+                            className="play-button bg-blue-700 text-white px-2 py-2 rounded-md flex items-center"
+                            onClick={playCry}
+                            disabled={isPlaying}
+                        >
+                            {isPlaying ? '' : <FaPlay className="mr-2" />}
+                            {isPlaying ? 'Playing Cry' : 'Play Cry'}
+                        </button>
                     </div>
                 </div>
                 <div className="grid items-start gap-6 md:grid-cols-2 lg:gap-10">
@@ -127,32 +132,22 @@ export default function PokemonDetails({ pokedex, pokemonData }) {
                         <img
                             alt={capitalizeFirstLetter(pokemonSpecie.name)}
                             className="aspect-square overflow-hidden rounded-xl object-cover"
-                            height="180rem"
+                            height="190rem"
                             src={avaiableSprites[currentSpriteIndex]}
-                            width="180rem"
+                            width="190rem"
                         />
-                        <div className="mt-2">
-                            <button
-                                className="play-button bg-blue-500 text-white px-2 py-2 rounded-md flex items-center"
-                                onClick={playCry}
-                                disabled={isPlaying}
-                            >
-                                {isPlaying ? '' : <FaPlay className="mr-2" />}
-                                {isPlaying ? 'Playing Cry' : 'Play Cry'}
-                            </button>
-                        </div>
-                    </div>
 
+                    </div>
                     <div className="grid gap-2">
-                        <dl className="grid grid-cols-2 gap-1 text-sm">
-                            <dt className="font-medium">Type</dt>
-                            <dd>{pokemonTypes}</dd>
-                            <dt className="font-medium">Height</dt>
-                            <dd>{formatUnits(pokemonInfo.height)} m</dd>
-                            <dt className="font-medium">Weight</dt>
-                            <dd>{formatUnits(pokemonInfo.weight)} kg</dd>
+                        <dl className="grid grid-cols-2 gap-1">
+                            <dt className="font-medium text-2xl">Type</dt>
+                            <dd className='font-medium text-2xl'>{pokemonTypes}</dd>
+                            <dt className="font-medium text-2xl">Height</dt>
+                            <dd className='font-medium text-2xl'>{formatUnits(pokemonInfo.height)} m</dd>
+                            <dt className="font-medium text-2xl">Weight</dt>
+                            <dd className='font-medium text-2xl'>{formatUnits(pokemonInfo.weight)} kg</dd>
                         </dl>
-                        <p>
+                        <p className='text-xl'>
                             {pokemonDescription?.flavor_text || 'No description'}
                         </p>
                     </div>
