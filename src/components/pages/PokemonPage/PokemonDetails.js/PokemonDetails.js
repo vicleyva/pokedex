@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { capitalizeFirstLetter } from "../../../shared/helpers/utils";
-import { FaPlay, FaStop } from 'react-icons/fa';
+import { FaPlay, FaStop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import RomanNumerals from 'roman-numerals';
 import Progress from '../Progress/Progress';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
+import './PokemonDetails.css';
 
 const formatApiTexts = (growthRate) => {
     const words = growthRate.split('-');
@@ -28,6 +30,11 @@ const getGenerationNumber = (generation) => {
 export default function PokemonDetails({ pokemonData }) {
     const [currentSpriteIndex, setCurrentSpriteIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
+    const { id } = useParams()
+    const location = useLocation()
+    const { pokedexList } = location.state
+    const prev = (!!pokedexList[+id - 2]) ? { target: `/pokemon/${pokedexList[+id - 2].entry_number}`, name: capitalizeFirstLetter(pokedexList[+id - 2].pokemon_species.name) } : null;
+    const next = (!!pokedexList[+id]) ? { target: `/pokemon/${pokedexList[+id].entry_number}`, name: capitalizeFirstLetter(pokedexList[+id].pokemon_species.name) } : null;
 
     const { pokemonSpecie, pokemonInfo } = pokemonData;
     const pokemonDescription = pokemonSpecie.flavor_text_entries.find(x => x.language.name === 'en')
@@ -44,7 +51,7 @@ export default function PokemonDetails({ pokemonData }) {
     const baseSD = pokemonInfo.stats.find(x => x.stat.name === 'special-defense').base_stat;
     const baseSpeed = pokemonInfo.stats.find(x => x.stat.name === 'speed').base_stat;
     const cryUrl = pokemonInfo.cries.latest;
-    const orderedSprites = [
+    const orderedSprites = useMemo(() => [
         pokemonInfo.sprites.front_default,
         pokemonInfo.sprites.back_default,
         pokemonInfo.sprites.front_female,
@@ -52,9 +59,11 @@ export default function PokemonDetails({ pokemonData }) {
         pokemonInfo.sprites.back_shiny,
         pokemonInfo.sprites.front_shiny_female,
         pokemonInfo.sprites.back_shiny_female,
-    ]
-    let avaiableSprites = [];
-    avaiableSprites = orderedSprites.filter(x => !!x)
+    ], [pokemonInfo])
+    const avaiableSprites = useMemo(() => {
+        return orderedSprites.filter(x => !!x);
+    }, [orderedSprites]);
+
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -79,11 +88,43 @@ export default function PokemonDetails({ pokemonData }) {
     };
 
     return (
-        <div className="w-full p-4 space-y-6 overflow-y-auto">
-            <div className="container space-y-6">
-                <div className="flex flex-col gap-2">
-                    <h1 className="text-3xl font-bold tracking-tighter">{capitalizeFirstLetter(pokemonSpecie.name)}</h1>
-                    <p className="text-gray-500 ">{pokemonGenera?.genus || 'No data'}</p>
+        <div className="w-full p-3 space-y-3 overflow-y-auto">
+            <div className="container space-y-3">
+                <div className='grid gap-2 grid-cols-2 mt-0'>
+                    <div className='flex justify-end items-center'>
+                        {!!prev && (
+                            <NavLink
+                                to={prev.target}
+                                state={{
+                                    pokedexList,
+                                }}
+                                className='nav-button bg-blue-600 text-white px-1 py-1 rounded-md flex items-center'
+                            >
+                                <FaChevronLeft className="mr-2" />
+                                <span>{prev.name}</span>
+                            </NavLink>
+                        )}
+                    </div>
+                    <div className='flex justify-start items-center'>
+                        {!!next && (
+                            <NavLink
+                                to={next.target}
+                                state={{
+                                    pokedexList,
+                                }}
+                                className='nav-button bg-blue-600 text-white px-1 py-1 rounded-md flex items-center'
+                            >
+                                <span className='mr-1'>{next.name}</span>
+                                <FaChevronRight className="ml-1" />
+                            </NavLink>
+                        )}
+                    </div>
+                </div>
+                <div className="flex flex-row">
+                    <div>
+                        <h1 className="text-3xl font-bold tracking-tighter">{capitalizeFirstLetter(pokemonSpecie.name)}</h1>
+                        <p className="text-gray-500 ">{pokemonGenera?.genus || 'No data'}</p>
+                    </div>
                 </div>
                 <div className="grid items-start gap-6 md:grid-cols-2 lg:gap-10">
                     <div className="flex flex-col items-center justify-center">
@@ -94,9 +135,9 @@ export default function PokemonDetails({ pokemonData }) {
                             src={avaiableSprites[currentSpriteIndex]}
                             width="180rem"
                         />
-                        <div className="mt-4">
+                        <div className="mt-2">
                             <button
-                                className="bg-blue-500 text-white px-4 py-2 rounded-md flex items-center"
+                                className="play-button bg-blue-500 text-white px-2 py-2 rounded-md flex items-center"
                                 onClick={playCry}
                                 disabled={isPlaying}
                             >
