@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { capitalizeFirstLetter } from "../../../shared/helpers/utils";
-import { FaPlay, FaStop, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaPlay, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import RomanNumerals from 'roman-numerals';
 import Progress from '../Progress/Progress';
 import { NavLink, useLocation, useParams } from 'react-router-dom';
@@ -141,8 +141,8 @@ export default function PokemonDetails({ pokemonData }) {
                                 onClick={playCry}
                                 disabled={isPlaying}
                             >
-                                {isPlaying ? <FaStop className="mr-2" /> : <FaPlay className="mr-2" />}
-                                {isPlaying ? 'Stop Cry' : 'Play Cry'}
+                                {isPlaying ? '' : <FaPlay className="mr-2" />}
+                                {isPlaying ? 'Playing Cry' : 'Play Cry'}
                             </button>
                         </div>
                     </div>
