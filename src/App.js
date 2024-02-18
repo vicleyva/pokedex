@@ -37,9 +37,9 @@ function App() {
     >
       {!!isLoading && <Loading />}
       {!isLoading && !!pokedex && <Sidebar pokedex={pokedex} />}
-      {!isLoading && <Routes>
+      {!isLoading && !!pokedex && <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/pokemon/:id' element={<PokemonPage />} />
+        <Route path='/pokemon/:id' element={<PokemonPage pokedex={pokedex.pokemon_entries} />} />
         <Route path='/*' element={<NotFound />} />
       </Routes>}
     </div>

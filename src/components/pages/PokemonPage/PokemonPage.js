@@ -6,7 +6,7 @@ import NotFound from "../NotFound/NotFound";
 import PokemonDetails from './PokemonDetails.js/PokemonDetails';
 import { useParams } from 'react-router-dom';
 
-export default function PokemonPage() {
+export default function PokemonPage({ pokedex }) {
     const { error, isLoading, reset, sendRequest } = useFetch()
     const [pokemonData, setPokemonData] = useState(null);
     const { id } = useParams()
@@ -35,7 +35,7 @@ export default function PokemonPage() {
     return (
         <div className='flex w-full h-full'>
             {!!isLoading && <Loading />}
-            {!isLoading && !!pokemonData && <PokemonDetails pokemonData={pokemonData} />}
+            {!isLoading && !!pokemonData && !!pokedex && <PokemonDetails pokedex={pokedex} pokemonData={pokemonData} />}
         </div>
     )
 }

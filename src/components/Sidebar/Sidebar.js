@@ -21,9 +21,6 @@ export default function Sidebar({ pokedex }) {
                     < NavLink
                         key={pokemon.entry_number}
                         to={`/pokemon/${pokemon.entry_number}`}
-                        state={{
-                            pokedexList,
-                        }}
                         className='nav-link bg-blue-600 text-white flex justify-between rounded-md py-2 px-4 mb-2 cursor-pointer'
                     >
                         {({ isActive }) => {

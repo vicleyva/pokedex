@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from "../../../shared/helpers/utils";
 import { FaPlay, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import RomanNumerals from 'roman-numerals';
 import Progress from '../Progress/Progress';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import './PokemonDetails.css';
 
 const formatApiTexts = (growthRate) => {
@@ -27,14 +27,12 @@ const getGenerationNumber = (generation) => {
     return arabicNumber;
 };
 
-export default function PokemonDetails({ pokemonData }) {
+export default function PokemonDetails({ pokedex, pokemonData }) {
     const [currentSpriteIndex, setCurrentSpriteIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const { id } = useParams()
-    const location = useLocation()
-    const { pokedexList } = location.state
-    const prev = (!!pokedexList[+id - 2]) ? { target: `/pokemon/${pokedexList[+id - 2].entry_number}`, name: capitalizeFirstLetter(pokedexList[+id - 2].pokemon_species.name) } : null;
-    const next = (!!pokedexList[+id]) ? { target: `/pokemon/${pokedexList[+id].entry_number}`, name: capitalizeFirstLetter(pokedexList[+id].pokemon_species.name) } : null;
+    const prev = (!!pokedex[+id - 2]) ? { target: `/pokemon/${pokedex[+id - 2].entry_number}`, name: capitalizeFirstLetter(pokedex[+id - 2].pokemon_species.name) } : null;
+    const next = (!!pokedex[+id]) ? { target: `/pokemon/${pokedex[+id].entry_number}`, name: capitalizeFirstLetter(pokedex[+id].pokemon_species.name) } : null;
 
     const { pokemonSpecie, pokemonInfo } = pokemonData;
     const pokemonDescription = pokemonSpecie.flavor_text_entries.find(x => x.language.name === 'en')
@@ -63,6 +61,10 @@ export default function PokemonDetails({ pokemonData }) {
     const avaiableSprites = useMemo(() => {
         return orderedSprites.filter(x => !!x);
     }, [orderedSprites]);
+
+    // useEffect(() => {
+
+    // }, [input]);
 
 
     useEffect(() => {
@@ -95,9 +97,6 @@ export default function PokemonDetails({ pokemonData }) {
                         {!!prev && (
                             <NavLink
                                 to={prev.target}
-                                state={{
-                                    pokedexList,
-                                }}
                                 className='nav-button bg-blue-600 text-white px-1 py-1 rounded-md flex items-center'
                             >
                                 <FaChevronLeft className="mr-2" />
@@ -109,9 +108,6 @@ export default function PokemonDetails({ pokemonData }) {
                         {!!next && (
                             <NavLink
                                 to={next.target}
-                                state={{
-                                    pokedexList,
-                                }}
                                 className='nav-button bg-blue-600 text-white px-1 py-1 rounded-md flex items-center'
                             >
                                 <span className='mr-1'>{next.name}</span>
