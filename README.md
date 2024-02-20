@@ -10,7 +10,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 - [Node.js](https://nodejs.org/) installed on your machine
 - [npm](https://www.npmjs.com/) (Node Package Manager)
-- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
 
 ### Installing
 
@@ -37,6 +36,7 @@ The  app will be available at http://localhost:3000 in your browser.
 
     React - JavaScript library for building user interfaces
     PokeAPI - The RESTful Pokémon API
+    [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
 
 ### About the Project
 
