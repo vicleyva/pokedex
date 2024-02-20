@@ -34,9 +34,9 @@ The  app will be available at http://localhost:3000 in your browser.
 
 ### Built With
 
-    React - JavaScript library for building user interfaces
-    PokeAPI - The RESTful Pokémon API
-    [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
+- React - JavaScript library for building user interfaces
+- PokeAPI - The RESTful Pokémon API
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
 
 ### About the Project
 
